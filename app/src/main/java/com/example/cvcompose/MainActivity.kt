@@ -1,15 +1,14 @@
 package com.example.cvcompose
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
 import android.widget.Toolbar
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.foundation.BorderStroke
-import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
-import androidx.compose.foundation.border
+import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
@@ -49,7 +48,6 @@ fun ViewContainer() {
         content = { Content() }
 
 
-
     )
 }
 
@@ -79,7 +77,11 @@ fun DialogAlert() {
                 .align(Alignment.BottomEnd),
             colors = ButtonDefaults.buttonColors(backgroundColor = Color.Transparent)
         ) {
-            Text(text = "CONTACTO", style = TextStyle(fontWeight = FontWeight.Bold))
+            Text(
+                text = "CONTACTO",
+                color = colorResource(id = R.color.green_android),
+                style = TextStyle(fontWeight = FontWeight.Bold)
+            )
         }
     }
     MyDialog(show, { show = false }, { Log.i("yo", "click") })
@@ -91,7 +93,8 @@ fun MyDialog(show: Boolean, onDimiss: () -> Unit, onConfirm: () -> Unit) {
         AlertDialog(onDismissRequest = { onDimiss() },
             confirmButton = {
                 TextButton(onClick = { onConfirm() }) {
-                    Text(text = " ")
+                    Text(text = "GitHub")
+                    LinkGit()
                 }
             },
             dismissButton = {
@@ -109,7 +112,22 @@ fun MyDialog(show: Boolean, onDimiss: () -> Unit, onConfirm: () -> Unit) {
 
     }
 }
+@Composable
 
+fun LinkGit() {
+    val context = LocalContext.current
+
+    Column {
+        Text(
+            "",
+            modifier = Modifier.clickable {
+                val url = "https://github.com/DevDavidRamos?tab=repositories" // URL a la que deseas dirigir al usuario
+                val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
+                context.startActivity(intent)
+            }
+        )
+    }
+}
 @Composable
 fun Content() {
 
@@ -273,7 +291,7 @@ fun Content() {
                     .fillMaxWidth(),
                 textAlign = TextAlign.Center
             )
-       DialogAlert()
+            DialogAlert()
 
 
         }
