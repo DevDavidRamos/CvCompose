@@ -93,7 +93,7 @@ fun MyDialog(show: Boolean, onDimiss: () -> Unit, onConfirm: () -> Unit) {
         AlertDialog(onDismissRequest = { onDimiss() },
             confirmButton = {
                 TextButton(onClick = { onConfirm() }) {
-                    Text(text = "GitHub")
+                    Text(text = "GitHub", color =  colorResource(id = R.color.green_android))
                     LinkGit()
                 }
             },
@@ -112,6 +112,7 @@ fun MyDialog(show: Boolean, onDimiss: () -> Unit, onConfirm: () -> Unit) {
 
     }
 }
+
 @Composable
 
 fun LinkGit() {
@@ -121,13 +122,15 @@ fun LinkGit() {
         Text(
             "",
             modifier = Modifier.clickable {
-                val url = "https://github.com/DevDavidRamos?tab=repositories" // URL a la que deseas dirigir al usuario
+                val url =
+                    "https://github.com/DevDavidRamos?tab=repositories" // URL a la que deseas dirigir al usuario
                 val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
                 context.startActivity(intent)
             }
         )
     }
 }
+
 @Composable
 fun Content() {
 
@@ -221,6 +224,11 @@ fun Content() {
                         modifier = Modifier.padding(6.dp)
                     )
                     Text(text = "NETBEANS", color = Color.White, modifier = Modifier.padding(6.dp))
+                    Text(
+                        text = "KOTLIN(ANDROID)",
+                        color = Color.White,
+                        modifier = Modifier.padding(6.dp)
+                    )
                     Text(
                         text = "JAVA(ANDROID, JAVA FX)",
                         color = Color.White,
